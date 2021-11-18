@@ -36,5 +36,40 @@ export class AwsCdkAppsyncStack extends cdk.Stack {
     new cdk.CfnOutput(this, 'Stack Region', {
       value: this.region,
     })
+
+    const notesLambda = new lambda.Function(this, 'AppSyncNotesHandler', {
+      runtime: lambda.Runtime.NODEJS_14_X,
+      handler: 'main.handler',
+      code: lambda.Code.fromAsset('lambda-fns'),
+      memorySize: 1024,
+    })
+
+    // Set the new Lambda function as a data source for the AppSync API
+    const lambdaDs = api.addLambdaDataSource('lambdaDatasource', notesLambda)
+
+    lambdaDs.createResolver({
+      typeName: 'Query',
+      fieldName: 'getNoteById',
+    })
+
+    lambdaDs.createResolver({
+      typeName: 'Query',
+      fieldName: 'listNotes',
+    })
+
+    lambdaDs.createResolver({
+      typeName: 'Mutation',
+      fieldName: 'createNote',
+    })
+
+    lambdaDs.createResolver({
+      typeName: 'Mutation',
+      fieldName: 'deleteNote',
+    })
+
+    lambdaDs.createResolver({
+      typeName: 'Mutation',
+      fieldName: 'updateNote',
+    })
   }
 }
