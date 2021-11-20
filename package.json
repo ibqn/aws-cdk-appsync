@@ -2,6 +2,7 @@
   "name": "aws-cdk-appsync",
   "version": "0.1.0",
   "license": "UNLICENSED",
+  "private": true,
   "bin": {
     "aws-cdk-appsync": "bin/aws-cdk-appsync.js"
   },
