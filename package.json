@@ -1,6 +1,7 @@
 {
   "name": "aws-cdk-appsync",
   "version": "0.1.0",
+  "license": "UNLICENSED",
   "bin": {
     "aws-cdk-appsync": "bin/aws-cdk-appsync.js"
   },
@@ -11,20 +12,20 @@
     "cdk": "cdk"
   },
   "devDependencies": {
-    "@aws-cdk/assert": "1.132.0",
+    "@aws-cdk/assert": "1.133.0",
     "@types/jest": "^26.0.10",
     "@types/node": "10.17.27",
-    "aws-cdk": "1.132.0",
+    "aws-cdk": "1.133.0",
     "jest": "^26.4.2",
     "ts-jest": "^26.2.0",
     "ts-node": "^9.0.0",
     "typescript": "~3.9.7"
   },
   "dependencies": {
-    "@aws-cdk/aws-appsync": "1.132.0",
-    "@aws-cdk/aws-dynamodb": "1.132.0",
-    "@aws-cdk/aws-lambda": "1.132.0",
-    "@aws-cdk/core": "1.132.0",
+    "@aws-cdk/aws-appsync": "1.133.0",
+    "@aws-cdk/aws-dynamodb": "1.133.0",
+    "@aws-cdk/aws-lambda": "1.133.0",
+    "@aws-cdk/core": "1.133.0",
     "source-map-support": "^0.5.16"
   }
 }

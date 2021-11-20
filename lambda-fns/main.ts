@@ -1,9 +1,9 @@
 import createNote from './create-note'
-import deleteNote from './deleteNote'
-import getNoteById from './getNoteById'
-import listNotes from './listNotes'
-import updateNote from './updateNote'
-import Note from './Note'
+import deleteNote from './delete-note'
+import getNoteById from './get-note-by-id'
+import listNotes from './list-notes'
+import updateNote from './update-note'
+import Note from './note'
 
 type AppSyncEvent = {
   info: {

@@ -1,21 +1,17 @@
 const AWS = require('aws-sdk')
 const docClient = new AWS.DynamoDB.DocumentClient()
 
-async function deleteNote(noteId: string) {
+async function getNoteById(noteId: string) {
   const params = {
     TableName: process.env.NOTES_TABLE,
-    Key: {
-      id: noteId,
-    },
+    Key: { id: noteId },
   }
-
   try {
-    await docClient.delete(params).promise()
-    return noteId
+    const { Item } = await docClient.get(params).promise()
+    return Item
   } catch (err) {
     console.log('DynamoDB error: ', err)
-    return null
   }
 }
 
-export default deleteNote
+export default getNoteById
