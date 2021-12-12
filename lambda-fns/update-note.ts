@@ -21,8 +21,10 @@ async function updateNote(note: any) {
     UpdateExpression: '',
     ReturnValues: 'UPDATED_NEW',
   }
+
   let prefix = 'set '
   let attributes = Object.keys(note)
+
   for (let i = 0; i < attributes.length; i++) {
     let attribute = attributes[i]
     if (attribute !== 'id') {
@@ -33,7 +35,9 @@ async function updateNote(note: any) {
       prefix = ', '
     }
   }
+
   console.log('params: ', params)
+
   try {
     await docClient.update(params).promise()
     return note
