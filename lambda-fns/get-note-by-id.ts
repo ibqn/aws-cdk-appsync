@@ -1,16 +1,19 @@
-const AWS = require('aws-sdk')
+import * as AWS from 'aws-sdk'
+
 const docClient = new AWS.DynamoDB.DocumentClient()
 
 async function getNoteById(noteId: string) {
   const params = {
-    TableName: process.env.NOTES_TABLE,
+    TableName: process.env.NOTES_TABLE!,
     Key: { id: noteId },
   }
+
   try {
     const { Item } = await docClient.get(params).promise()
     return Item
   } catch (err) {
     console.log('DynamoDB error: ', err)
+    return null
   }
 }
 

@@ -1,9 +1,10 @@
-const AWS = require('aws-sdk')
+import * as AWS from 'aws-sdk'
+
 const docClient = new AWS.DynamoDB.DocumentClient()
 
 type Params = {
-  TableName: string | undefined
-  Key: string | {}
+  TableName: string
+  Key: AWS.DynamoDB.DocumentClient.Key
   ExpressionAttributeValues: any
   ExpressionAttributeNames: any
   UpdateExpression: string
@@ -12,7 +13,7 @@ type Params = {
 
 async function updateNote(note: any) {
   let params: Params = {
-    TableName: process.env.NOTES_TABLE,
+    TableName: process.env.NOTES_TABLE!,
     Key: {
       id: note.id,
     },
