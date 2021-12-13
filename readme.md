@@ -1,14 +1,22 @@
 # Welcome to your CDK TypeScript project!
 
-This is a blank project for TypeScript development with CDK.
+## Note
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+Can't migrate to CDKv2 due to
 
-## Useful commands
+> There are no hand-written (L2) constructs for this service yet. However, you can still use the automatically generated L1 constructs, and use this service exactly as you would using CloudFormation directly.
 
- * `npm run build`   compile typescript to js
- * `npm run watch`   watch for changes and compile
- * `npm run test`    perform the jest unit tests
- * `cdk deploy`      deploy this stack to your default AWS account/region
- * `cdk diff`        compare deployed stack with current state
- * `cdk synth`       emits the synthesized CloudFormation template
+## Getting Started
+
+Bootstrap and deploy this project
+
+```sh
+cdk bootstrap
+cdk deploy
+```
+
+To destroy this project please execute
+
+```sh
+cdk destroy
+```
