@@ -17,14 +17,17 @@ input UpdateNoteInput {
 }
 
 type Query {
-  getNoteById(noteId: String!): Note
-  listNotes: [Note]
+  getNoteById(noteId: String!): Note @aws_api_key @aws_cognito_user_pools
+  listNotes: [Note] @aws_api_key @aws_cognito_user_pools
 }
 
 type Mutation {
   createNote(note: NoteInput!): Note
+    @aws_cognito_user_pools(cognito_groups: ["admin"])
   updateNote(note: UpdateNoteInput!): Note
+    @aws_cognito_user_pools(cognito_groups: ["admin"])
   deleteNote(noteId: String!): String
+    @aws_cognito_user_pools(cognito_groups: ["admin"])
 }
 
 type Subscription {

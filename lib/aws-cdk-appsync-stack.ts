@@ -44,6 +44,14 @@ export class AwsCdkAppsyncStack extends cdk.Stack {
             expires: cdk.Expiration.after(cdk.Duration.days(365)),
           },
         },
+        additionalAuthorizationModes: [
+          {
+            authorizationType: appsync.AuthorizationType.USER_POOL,
+            userPoolConfig: {
+              userPool,
+            },
+          },
+        ],
       },
       xrayEnabled: true,
     })
@@ -61,6 +69,14 @@ export class AwsCdkAppsyncStack extends cdk.Stack {
     // Prints out the stack region to the terminal
     new cdk.CfnOutput(this, 'Stack Region', {
       value: this.region,
+    })
+
+    new cdk.CfnOutput(this, 'UserPoolId', {
+      value: userPool.userPoolId,
+    })
+
+    new cdk.CfnOutput(this, 'UserPoolClientId', {
+      value: userPoolClient.userPoolClientId,
     })
 
     const notesLambda = new lambda.Function(this, 'AppSyncNotesHandler', {
