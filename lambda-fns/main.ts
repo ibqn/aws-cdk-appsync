@@ -15,7 +15,7 @@ type AppSyncEvent = {
   }
 }
 
-exports.handler = async (event: AppSyncEvent) => {
+export const handler = async (event: AppSyncEvent) => {
   switch (event.info.fieldName) {
     case 'getNoteById':
       return await getNoteById(event.arguments.noteId)

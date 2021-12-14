@@ -2,7 +2,9 @@ import * as cdk from '@aws-cdk/core'
 import * as appsync from '@aws-cdk/aws-appsync'
 import * as ddb from '@aws-cdk/aws-dynamodb'
 import * as lambda from '@aws-cdk/aws-lambda'
+import { NodejsFunction } from '@aws-cdk/aws-lambda-nodejs'
 import * as cognito from '@aws-cdk/aws-cognito'
+import * as path from 'path'
 
 export class AwsCdkAppsyncStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
@@ -79,10 +81,10 @@ export class AwsCdkAppsyncStack extends cdk.Stack {
       value: userPoolClient.userPoolClientId,
     })
 
-    const notesLambda = new lambda.Function(this, 'AppSyncNotesHandler', {
+    const notesLambda = new NodejsFunction(this, 'AppSyncNotesHandler', {
       runtime: lambda.Runtime.NODEJS_14_X,
-      handler: 'main.handler',
-      code: lambda.Code.fromAsset('lambda-fns'),
+      handler: 'handler',
+      entry: path.resolve(process.cwd(), 'lambda-fns', 'main.ts'),
       memorySize: 1024,
     })
 
