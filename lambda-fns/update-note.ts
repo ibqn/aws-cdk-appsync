@@ -1,4 +1,8 @@
 import * as AWS from 'aws-sdk'
+import Note from './note'
+import { formatISO as format } from 'date-fns'
+
+type KeyofNote = keyof Note
 
 const docClient = new AWS.DynamoDB.DocumentClient()
 
@@ -11,7 +15,7 @@ type Params = {
   ReturnValues: string
 }
 
-async function updateNote(note: any) {
+async function updateNote(note: Partial<Note>) {
   let params: Params = {
     TableName: process.env.NOTES_TABLE!,
     Key: {
@@ -23,6 +27,9 @@ async function updateNote(note: any) {
     ReturnValues: 'UPDATED_NEW',
   }
 
+  const date = new Date()
+  note.updatedAt = format(date)
+
   let prefix = 'set '
   let attributes = Object.keys(note)
 
@@ -31,7 +38,8 @@ async function updateNote(note: any) {
     if (attribute !== 'id') {
       params['UpdateExpression'] +=
         prefix + '#' + attribute + ' = :' + attribute
-      params['ExpressionAttributeValues'][':' + attribute] = note[attribute]
+      params['ExpressionAttributeValues'][':' + attribute] =
+        note[attribute as KeyofNote]
       params['ExpressionAttributeNames']['#' + attribute] = attribute
       prefix = ', '
     }

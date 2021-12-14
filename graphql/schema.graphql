@@ -1,19 +1,23 @@
-type Note {
+type Note @aws_api_key @aws_cognito_user_pools {
   id: ID!
   name: String!
   completed: Boolean!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
 }
 
 input NoteInput {
-  id: ID!
+  id: ID
   name: String!
   completed: Boolean!
+  createdAt: AWSDateTime
 }
 
 input UpdateNoteInput {
   id: ID!
   name: String
   completed: Boolean
+  createdAt: AWSDateTime
 }
 
 type Query {
