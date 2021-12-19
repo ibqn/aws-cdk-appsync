@@ -1,12 +1,13 @@
 {
   "name": "aws-cdk-appsync",
   "version": "0.1.0",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "private": true,
   "bin": {
     "aws-cdk-appsync": "bin/aws-cdk-appsync.js"
   },
   "scripts": {
+    "postinstall": "(pushd lambda-fns && yarn && popd);",
     "deploy": "cdk deploy --outputs-file ./cdk-outputs.json",
     "build": "tsc",
     "clean": "tsc --build --clean",
@@ -18,8 +19,6 @@
     "@aws-cdk/assert": "1.136.0",
     "@types/jest": "^26.0.10",
     "@types/node": "^10.17.27",
-    "@types/uuid": "^8.3.3",
-    "aws-cdk": "1.136.0",
     "constructs": "^3.3.165",
     "esbuild": "^0.14.5",
     "jest": "^26.4.2",
@@ -34,8 +33,6 @@
     "@aws-cdk/aws-lambda": "1.136.0",
     "@aws-cdk/aws-lambda-nodejs": "1.136.0",
     "@aws-cdk/core": "1.136.0",
-    "date-fns": "^2.27.0",
-    "source-map-support": "^0.5.16",
-    "uuid": "^8.3.2"
+    "source-map-support": "^0.5.16"
   }
 }

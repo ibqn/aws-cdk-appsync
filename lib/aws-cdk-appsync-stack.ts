@@ -129,5 +129,6 @@ export class AwsCdkAppsyncStack extends cdk.Stack {
 
     // Create an environment variable that we will use in the function code
     notesLambda.addEnvironment('NOTES_TABLE', notesTable.tableName)
+    notesLambda.addEnvironment('REGION', this.region)
   }
 }
