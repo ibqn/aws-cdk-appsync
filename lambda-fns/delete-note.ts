@@ -1,17 +1,18 @@
-import * as AWS from 'aws-sdk'
-
-const docClient = new AWS.DynamoDB.DocumentClient()
+import { ddbClient } from './ddb-client'
+import { DeleteItemCommand } from '@aws-sdk/client-dynamodb'
+import { marshall } from '@aws-sdk/util-dynamodb'
 
 async function deleteNote(noteId: string) {
   const params = {
     TableName: process.env.NOTES_TABLE!,
-    Key: {
+    Key: marshall({
       id: noteId,
-    },
+    }),
   }
 
   try {
-    await docClient.delete(params).promise()
+    const results = await ddbClient.send(new DeleteItemCommand(params))
+    console.log(results)
     return noteId
   } catch (err) {
     console.log('DynamoDB error: ', err)

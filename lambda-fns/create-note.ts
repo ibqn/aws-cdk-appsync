@@ -1,10 +1,9 @@
 import Note from './note'
+import { ddbClient } from './ddb-client'
 import { v4 as uuid } from 'uuid'
 import { formatISO as format } from 'date-fns'
-import { DynamoDBClient, PutItemCommand } from '@aws-sdk/client-dynamodb'
+import { PutItemCommand } from '@aws-sdk/client-dynamodb'
 import { marshall } from '@aws-sdk/util-dynamodb'
-
-const ddbClient = new DynamoDBClient({ region: process.env.REGION! })
 
 async function createNote(note: Note) {
   if (!note.id) {
